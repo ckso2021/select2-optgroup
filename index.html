@@ -1,0 +1,204 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="css/select2.min.css" />
+    <link rel="stylesheet" href="css/select2.optgroupSelect.css" />
+    <style>
+      .select2-selection__rendered {
+        width: 100%;
+      }
+
+      .my_select2_optgroup_selected {
+        background-color: #ddd;
+      }
+      .my_select2_optgroup_hovered {
+        color: #fff;
+        background-color: #5897fb !important;
+        cursor: pointer;
+      }
+      strong.select2-results__group {
+        padding: 0 !important;
+      }
+      .my_select2_optgroup {
+        display: block;
+        padding: 6px;
+      }
+    </style>
+  </head>
+  <body>
+    <select id="select1" multiple="multiple" style="width: 100%">
+      <optgroup label="wsssss">
+        <option value="222">sssss</option>
+        <option value="333">5565</option>
+        <option value="88999">dfsdfs</option>
+        <option value="234">23423432d</option>
+      </optgroup>
+      <optgroup label="4576789999">
+        <option value="werw">werwer</option>
+        <option value="23432">werdfsddwer</option>
+        <option value="werwer">dsfs</option>
+        <option value="sdfsdf">sdeefs</option>
+        <option value="334">dfserewrdfs</option>
+        <option value="324234">3233</option>
+        <option value="22465f34">553423465</option>
+        <option value="3ara">34</option>
+        <option value="werwer">sserersss</option>
+        <option value="13213">eew</option>
+        <option value="ewrwer">dfseedfs</option>
+        <option value="xcvcxv">454545</option>
+        <option value="4234">6656gh</option>
+        <option value="3qwad3">ghghh</option>
+      </optgroup>
+    </select>
+    <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+    <script src="js/select2.min.js"></script>
+    <script src="js/select2.optgroupSelect.js"></script>
+    <script>
+
+      /*
+      $("#select1").select2({
+        closeOnSelect: false,
+      });
+
+      $("#select1").on("select2:open", function (e) {
+        $("#select2-select1-results").on("click", function (event) {
+          event.stopPropagation();
+          var data = $(event.target).html();
+          var selectedOptionGroup = data.toString().trim();
+
+          var groupchildren = [];
+
+          var group = $("#select1").find("optgroup[label='" + selectedOptionGroup.toString() + "']");
+
+          group.find("option").each(function(){
+            groupchildren.push($(this).val());
+          });
+
+          // for (var i = 0; i < countries.length; i++) {
+          //   if (
+          //     selectedOptionGroup.toString() === countries[i].text.toString()
+          //   ) {
+          //     for (var j = 0; j < countries[i].children.length; j++) {
+          //       groupchildren.push(countries[i].children[j].id);
+          //     }
+          //   }
+          // }
+
+          var options = [];
+
+          options = $("#select1").val();
+
+          if (options === null || options === "") {
+            options = [];
+          }
+
+          for (var i = 0; i < groupchildren.length; i++) {
+            var count = 0;
+
+            for (var j = 0; j < options.length; j++) {
+              if (options[j].toString() === groupchildren[i].toString()) {
+                count++;
+                break;
+              }
+            }
+
+            if (count === 0) {
+              options.push(groupchildren[i].toString());
+            }
+          }
+
+          $("#select1").val(options);
+          $("#select1").trigger("change"); // Notify any JS components that the value changed
+        //  $("#select1").select2("close");
+        });
+      });*/
+      /*
+      $("#select1").select2({
+        closeOnSelect: false,
+        templateResult: function (item) {
+          console.log("item", item.children);
+          if (typeof item.children != "undefined") {
+            var s =
+              $(item.element).find("option").length -
+              $(item.element).find("option:selected").length;
+
+            //select2-results__option--selected
+            // My optgroup element
+            var el = $(
+              '<span class="my_select2_optgroup' +
+                (s ? "" : " my_select2_optgroup_selected") +
+                '" style="cursor: pointer;">' +
+                item.text +
+                "</span>"
+            );
+
+            // Click event
+            el.click(function () {
+              // Select all optgroup child if there aren't, else deselect all
+              $("#select1")
+                .find('optgroup[label="' + $(this).text() + '"] option')
+                .prop(
+                  "selected",
+                  $(item.element).find("option").length -
+                    $(item.element).find("option:selected").length
+                );
+              // var s =
+              //   $(item.element).find("option").length -
+              //   $(item.element).find("option:selected").length;
+              // if (s) {
+              //   $(item.element)
+              //     .find("option")
+              //     .removeClass("select2-results__option--selected").trigger('change');
+              // } else {
+              //   $(item.element)
+              //     .find("option:selected")
+              //     .addClass("select2-results__option--selected");
+              // }
+
+              // Trigger change event + close dropdown
+              $("#select1").change();
+             // $("#select1").select2("close");
+            });
+
+            // Hover events to properly manage display
+            el.mouseover(function () {
+              $("li.select2-results__option--highlighted").removeClass(
+                "select2-results__option--highlighted"
+              );
+            });
+            el.hover(
+              function () {
+                el.addClass("my_select2_optgroup_hovered");
+              },
+              function () {
+                el.removeClass("my_select2_optgroup_hovered");
+              }
+            );
+            return el;
+          } else {
+            // $(item).on("click", function () {
+            //   $(this).addClass("select2-results__option--selected");
+            // });
+          }
+          return item.text;
+        },
+      });
+      //         $('#select1').select2({
+      //             closeOnSelect: false
+      // });
+*/
+
+      $.fn.select2.amd.require(
+        ["optgroup-data", "optgroup-results"],
+        function (OptgroupData, OptgroupResults) {
+          // Construct!
+          $("#select1").select2({
+            dataAdapter: OptgroupData,
+            resultsAdapter: OptgroupResults,
+            closeOnSelect: false
+          });
+        }
+      );
+    </script>
+  </body>
+</html>
