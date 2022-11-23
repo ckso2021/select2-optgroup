@@ -39,40 +39,42 @@
             });
         };
         
-        OptgroupData.prototype.select = function (data) {
-            if ($(data.element).is('optgroup')){
-                this.optgroupSelect(data);
-                return;
-            }
+        // OptgroupData.prototype.select = function (data) {
+        //     if ($(data.element).is('optgroup')){
+        //         this.optgroupSelect(data);
+        //         return;
+        //     }
 
-            // Change selected property on underlying option element 
-            data.selected = !data.selected;
-            data.element.selected = !data.element.selected;
+        //     // Change selected property on underlying option element 
+        //     data.selected = !data.selected;
+        //     data.element.selected = !data.element.selected;
 
-            console.log('xxxdata', data);
+        //     console.log('xxxdata', data);
     
-            this.$element.trigger('change');
-            this.clearSearch();
+        //     this.$element.trigger('change');
+        //     this.clearSearch();
     
-            // Manually trigger dropdrop positioning handler
-            $(window).trigger('scroll.select2');        
-        };
+        //     // Manually trigger dropdrop positioning handler
+        //     $(window).trigger('scroll.select2');        
+        // };
         
-        OptgroupData.prototype.unselect = function (data) {
-            if ($(data.element).is('optgroup')){
-                this.optgroupUnselect(data);
-                return;
-            }
+        // OptgroupData.prototype.unselect = function (data) {
+        //     if ($(data.element).is('optgroup')){
+        //         this.optgroupUnselect(data);
+        //         return;
+        //     }
             
-            // Change selected property on underlying option element 
-            data.selected = !data.selected;
-            data.element.selected = !data.element.selected;
+        //     // Change selected property on underlying option element 
+
+        //     console.log(data);
+        //     data.selected = !data.selected;
+        //     data.element.selected = !data.element.selected;
             
-            this.$element.trigger('change');
+        //     this.$element.trigger('change');
             
-            // Manually trigger dropdrop positioning handler
-            $(window).trigger('scroll.select2');
-        };
+        //     // Manually trigger dropdrop positioning handler
+        //     $(window).trigger('scroll.select2');
+        // };
         
         OptgroupData.prototype.optgroupSelect = function (data) {
             data.selected = true;
@@ -309,6 +311,37 @@
                         $optgroup.attr('aria-selected', 'false');
                     }
                 });
+
+                 var val_in_grp = [];
+                $(".select2-selection__rendered").find("li").each(function(){
+                    var ele = $(this).find('.select2-selection__choice__display');
+
+                    var id = ele[0].id;
+                    id = id.split('-')[id.split('-').length - 1];
+
+                    if(id == 'optgroup'){
+                        self.$element.find('optgroup[label="' + ele.text() + '"] option').each(function(){
+                            if(!val_in_grp.includes($(this).val())){
+                                val_in_grp.push($(this).val());
+                            }
+                        });
+                    }
+                });
+
+                $(".select2-selection__rendered").find("li").each(function(){
+                    var ele = $(this).find('.select2-selection__choice__display');
+
+                    var id = ele[0].id;
+                    id = id.split('-')[id.split('-').length - 1];
+
+                    if(id != 'optgroup' && val_in_grp.includes(id)){
+                        $(this).remove();
+                    }
+                });
+    
+                if (!self.getHighlightedResults().length) {
+                    $('.select2-results__option[aria-selected]').first().trigger('mouseenter');
+                }
     
                 // if (!self.getHighlightedResults().length) {
                 //     $('.select2-results__option[aria-selected]').first().trigger('mouseenter');

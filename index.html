@@ -27,34 +27,31 @@
   </head>
   <body>
     <select id="select1" multiple="multiple" style="width: 100%">
-      <optgroup label="wsssss">
-        <option value="222">sssss</option>
-        <option value="333">5565</option>
-        <option value="88999">dfsdfs</option>
-        <option value="234">23423432d</option>
+      <optgroup label="Group abcd">
+        <option value="aaa">item aaa</option>
+        <option value="bbb">item bbb</option>
+        <option value="ccc">item ccc</option>
+        <option value="dddd">item ddd</option>
       </optgroup>
-      <optgroup label="4576789999">
-        <option value="werw">werwer</option>
-        <option value="23432">werdfsddwer</option>
-        <option value="werwer">dsfs</option>
-        <option value="sdfsdf">sdeefs</option>
-        <option value="334">dfserewrdfs</option>
-        <option value="324234">3233</option>
-        <option value="22465f34">553423465</option>
-        <option value="3ara">34</option>
-        <option value="werwer">sserersss</option>
-        <option value="13213">eew</option>
-        <option value="ewrwer">dfseedfs</option>
-        <option value="xcvcxv">454545</option>
-        <option value="4234">6656gh</option>
-        <option value="3qwad3">ghghh</option>
+      <optgroup label="Group efgh">
+        <option value="eee">item eee</option>
+        <option value="fff">item fff</option>
+        <option value="ggg">item ggg</option>
+        <option value="hhh">item hhh</option>
+      </optgroup>
+      <optgroup label="Group ec">
+        <option value="eee">item eee</option>
+        <option value="ccc">item ccc</option>
+      </optgroup>
+      <optgroup label="Group he">
+        <option value="hhh">item hhh</option>
+        <option value="eee">item eee</option>
       </optgroup>
     </select>
     <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
     <script src="js/select2.min.js"></script>
     <script src="js/select2.optgroupSelect.js"></script>
     <script>
-
       /*
       $("#select1").select2({
         closeOnSelect: false,
@@ -195,8 +192,55 @@
           $("#select1").select2({
             dataAdapter: OptgroupData,
             resultsAdapter: OptgroupResults,
-            closeOnSelect: false
+            closeOnSelect: false,
           });
+
+          // $("#select1").on("select2:select", function (e) {
+          //   var data = e.params.data;
+
+          //   //   console.log('select2:select', data);
+
+          //   var val_in_grp = [];
+          //   $(".select2-selection__rendered")
+          //     .find("li")
+          //     .each(function () {
+          //       var ele = $(this).find(".select2-selection__choice__display");
+
+          //       var id = ele[0].id;
+          //       id = id.split("-")[id.split("-").length - 1];
+
+          //       if (id == "optgroup") {
+          //         self.$element
+          //           .find('optgroup[label="' + ele.text() + '"] option')
+          //           .each(function () {
+          //             if (!val_in_grp.includes($(this).val())) {
+          //               val_in_grp.push($(this).val());
+          //             }
+          //           });
+          //       } else {
+          //         if (!val_in_grp.includes(id)) {
+          //           val_in_grp.push(id);
+          //         }
+          //       }
+          //     });
+          //     if (val_in_grp.includes(data.id)) {
+          //       $(this).find("option[value='" + data.id + "']").prop('selected', false);
+          //       $(".select2-selection__rendered").find("li").each(function(){
+          //           var ele = $(this).find('.select2-selection__choice__display');
+
+          //           var id = ele[0].id;
+          //           id = id.split('-')[id.split('-').length - 1];
+
+          //           console.log('errrrr', data.id , id);
+          //           if(id != 'optgroup' && data.id == id){
+          //               $(this).remove();
+          //           }
+          //       });
+          //     }else{
+          //       $(this).find("option[value='" + data.id + "']").prop('selected', true);
+          //     }
+          //     $(this).trigger('change');
+          // });
         }
       );
     </script>
